@@ -11,56 +11,58 @@ def listToString(s):
     
     # return string  
     return str1 
-
-upper = string.ascii_uppercase
-lower = string.ascii_lowercase
-upper_start = ord(upper[0])
-lower_start = ord(lower[0])
 def split(word):
     return [char for char in word]
+
+def rotEncrypt(str,n):
+	upper = string.ascii_uppercase
+	lower = string.ascii_lowercase
+	list=[]
+	assciList=[]
+	answerList=[]
+
+	list=(split(str))
+	for i in list:
+		assciList.append(ord(i))
+
+	result=[]
+	for temp in list:
+		if temp in upper:
+			var=ord(temp)-n
+			if var <ord ('A'):
+				dif=ord('A')-var
+				var=ord('Z')-(dif-1)
+		
+			result.append(var)
+		elif temp in lower:
+			var=ord(temp)-n
+			if var <ord ('a'):
+				dif=ord('a')-var
+				var=ord('z')-(dif-1)
+			result.append(var)
+
+
+		else:
+			result.append(temp)
+
+	count=0
+	answer=[]
+	letteranswerlist=[]
+	for i in result:
+		answer.append(i)
+		
+	for i in answer:
+
+		try:
+			temp=chr(i)
+			letteranswerlist.append(temp)
+	
+		except:
+			letteranswerlist.append(i)
+	
+	return listToString(letteranswerlist)
+
 str=input("Enter a string \n")
 n=int(input("Enter the value of n for ROT\t"))
-list=[]
-assciList=[]
-answerList=[]
-
-list=(split(str))
-for i in list:
-	assciList.append(ord(i))
-
-result=[]
-for temp in list:
-	if temp in upper:
-		var=ord(temp)-n
-		if var <ord ('A'):
-			dif=ord('A')-var
-			var=ord('Z')-(dif-1)
-		
-		result.append(var)
-	elif temp in lower:
-		var=ord(temp)-n
-		if var <ord ('a'):
-			dif=ord('a')-var
-			var=ord('z')-(dif-1)
-		result.append(var)
-
-
-	else:
-		result.append(temp)
-
-count=0
-answer=[]
-letteranswerlist=[]
-for i in result:
-	answer.append(i)
-	
-for i in answer:
-
-	try:
-		temp=chr(i)
-		letteranswerlist.append(temp)
-	
-	except:
-		letteranswerlist.append(i)
-	
-print(listToString(letteranswerlist))
+output=rotEncrypt(str,n)
+print(output)
